@@ -1,0 +1,41 @@
+<!-- 在這裡加入 poem1.html 的內容 -->
+<div id="poem-title">股票預測</div>
+<div id="poem-content">
+    <p>一切都是虛無的 請勿相信這支程式碼 不然你會輸到脫褲子</p>
+    <p>參考：<a href="http://60.250.174.165/GVE3S/index.aspx" target="_blank">http://60.250.174.165/GVE3S/index.aspx</a></p>
+</div>
+<script>
+    // 簡單的股票數據
+    const stocks = [
+        { name: '彰銀', cost: 17.4, current: 17.35, returns: null }, // 替換為實際數據，加入成本和當前股價
+        { name: '京城銀', cost: 38.15, current: 38.40, returns: null }, // 替換為實際數據，加入成本和當前股價
+        { name: '台中銀', cost: 14.9, current: 14.90, returns: null }, // 替換為實際數據，加入成本和當前股價
+        // 添加更多股票數據
+    ];
+
+    // 計算總報酬率
+    stocks.forEach(stock => {
+        if (stock.current !== null && stock.cost !== null) {
+            stock.returns = ((stock.current - stock.cost) / stock.cost) * 100; // 投資報酬率計算
+        }
+    });
+
+    // 根據報酬率排序
+    stocks.sort((a, b) => (b.returns || 0) - (a.returns || 0));
+
+    // 在這裡你可以使用 stocks 數據進行其他操作，比如在網頁上顯示排名等
+
+    // 在這裡加入生成股票預測內容的代碼
+    const poemContent = document.getElementById('poem-content');
+
+    // 更新預測內容
+    stocks.forEach(stock => {
+        const stockInfo = document.createElement('p');
+        if (stock.returns !== null) {
+            stockInfo.textContent = `${stock.name}：預測報酬率 ${stock.returns.toFixed(2)}%`;
+        } else {
+            stockInfo.textContent = `${stock.name}：預測報酬率未知`;
+        }
+        poemContent.appendChild(stockInfo);
+    });
+</script>
